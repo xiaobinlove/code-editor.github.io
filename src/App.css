@@ -1,0 +1,13 @@
+#root {
+    height: 100%;
+}
+.app {
+    display: flex;
+    height: 100%;
+}
+.content {
+    flex: 1;
+}
+.sider {
+    /*width: 200px;*/
+}
