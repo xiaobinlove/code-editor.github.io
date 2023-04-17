@@ -1,4 +1,7 @@
-import { EditorView } from '@codemirror/view'
+import {
+  EditorView,
+} from '@codemirror/view';
+
 export const baseTheme: any = EditorView.baseTheme({
   '&.cm-editor': {
     fontSize: '15px',
@@ -15,4 +18,4 @@ export const baseTheme: any = EditorView.baseTheme({
   '&.cm-editor .ͼt .ͼs': {
     color: '#d73a49',
   },
-})
+});

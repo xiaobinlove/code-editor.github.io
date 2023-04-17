@@ -1,40 +1,42 @@
+
 export interface Model {
-  code: string
-  name: string
-  children?: Model[]
-  type: 'model' | 'field',
-  value?: any
+  code: string,
+  name: string;
+  children?: Model[];
+  type: "model" | "field";
+  value?: any;
 }
+
 export const models: Model[] = [
   {
-    code: 'goods',
-    name: '商品',
+    code: 'user',
+    name: '用户',
     type: 'model',
     children: [
       {
-        code: 'id',
         name: 'id',
+        code: 'id',
         type: 'field',
-        value: 1
+        value: 1,
       },
       {
+        name: '姓名',
         code: 'name',
-        name: '商品名称',
         type: 'field',
-        value: '洗面奶'
+        value: '张三',
       },
       {
-        code: 'price',
-        name: '商品价格',
+        name: '年龄',
+        code: 'age',
         type: 'field',
-        value: '$20'
+        value: 18,
       },
       {
-        code: 'specifications',
-        name: '商品规格',
+        name: '性别',
+        code: 'sex',
         type: 'field',
-        value: '20ml'
+        value: 1,
       },
-    ]
-  }
+    ],
+  },
 ]

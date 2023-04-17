@@ -4,26 +4,31 @@ export interface CompletionsType {
   detail: string;
   type: string;
 }
+
 export interface PlaceholderThemesType {
-  [K: string]: CommonPlaceholderTheme
+  [K: string]: CommonPlaceholderTheme;
 }
+
 export interface FunctionType extends CompletionsType {
   handle: any;
 }
+
 export interface CommonPlaceholderTheme {
   textColor: string;
-  backgroundColor: string;
+  backgroudColor: string;
   borderColor: string;
 }
+
 export interface ScriptEditorRef {
   insertText?: (text: string, isTemplate: boolean) => void;
   clearText?: () => void;
   setText?: (text: string) => void;
 }
+
 export interface HintPathType {
   label: string;
   detail: string;
-  template: string;
   type: 'function' | 'keyword' | 'variable' | 'text' | 'property';
-  children?: HintPathType[]
+  template: string;
+  children?: HintPathType[];
 }

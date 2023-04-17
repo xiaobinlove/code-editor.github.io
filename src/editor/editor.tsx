@@ -1,10 +1,19 @@
-import { useRef, useCallback, useMemo,  useImperativeHandle, ForwardRefRenderFunction } from 'react'
-import { vscodeDark  } from '@uiw/codemirror-theme-vscode'
-import ReactCodeMirror, { ReactCodeMirrorRef } from "@uiw/react-codemirror";
-import { snippet } from '@codemirror/autocomplete'
-import { Extension } from "@codemirror/state";
-import { extensions } from './extensions'
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useCallback,
+  ForwardRefRenderFunction,
+  useMemo,
+} from 'react';
+import { githubLight } from '@uiw/codemirror-theme-github';
+import ReactCodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { snippet } from '@codemirror/autocomplete';
+import { Extension } from '@codemirror/state';
+
+import { extensions } from './extensions';
 import { CompletionsType, FunctionType, HintPathType, PlaceholderThemesType, ScriptEditorRef } from './interface';
+
 interface PropsType {
   completions: CompletionsType[];
   keywords?: string[];
@@ -20,6 +29,7 @@ interface PropsType {
   hintPaths?: HintPathType[];
   extensions?: Extension[];
 }
+
 const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
   completions,
   onValueChange,
@@ -34,7 +44,9 @@ const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
   defaultValue,
   hintPaths,
   extensions: extensionsProps,
-}, ref) => {
+},
+  ref,
+) => {
   const editorRef = useRef<ReactCodeMirrorRef>(null);
 
   const insertText = useCallback((text: string, isTemplate?: boolean) => {
@@ -89,7 +101,7 @@ const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
     });
     view.focus();
   }, []);
-  
+
   const setText = useCallback((text: string) => {
     const { view } = editorRef.current;
     view.dispatch({
@@ -104,6 +116,7 @@ const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
     });
     view.focus();
   }, []);
+
   useImperativeHandle(
     ref,
     () => {
@@ -116,7 +129,55 @@ const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
     },
     [insertText, clearText, setText]
   );
-  const extensionsMemo = useMemo(() => [
-    
-  ])
+
+  console.log(extensionsProps);
+  const extensionsMemo = useMemo(
+    () =>
+      [
+        ...extensions({
+          completions,
+          keywords,
+          placeholderThemes,
+          mode,
+          functions,
+          keywordsColor,
+          keywordsClassName,
+          hintPaths,
+        }),
+        ...(extensionsProps || [])
+      ],
+    [
+      completions,
+      keywords,
+      placeholderThemes,
+      mode,
+      functions,
+      keywordsColor,
+      keywordsClassName,
+      hintPaths,
+      extensionsProps,
+    ]
+  );
+
+  const onChangeHandle = useCallback(
+    (value: string) => {
+      onValueChange && onValueChange(value);
+    },
+    [onValueChange]
+  );
+
+  return (
+    <ReactCodeMirror
+      height={height}
+      width={width}
+      extensions={extensionsMemo}
+      theme={githubLight}
+      onChange={onChangeHandle}
+      value={defaultValue}
+      ref={editorRef}
+    />
+  );
 }
+
+
+export default forwardRef<ScriptEditorRef, PropsType>(Editor);

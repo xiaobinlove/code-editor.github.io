@@ -1,8 +1,9 @@
-import { snippetCompletion } from '@codemirror/autocomplete'
-import { CompletionsType } from '../interface'
-export function customCompletions (completions: CompletionsType[]) {
+import { snippetCompletion } from '@codemirror/autocomplete';
+import { CompletionsType } from '../interface';
+
+export function customCompletions(completions: CompletionsType[]) {
   return (context: any) => {
-    const word = context.matchBefore(/\w*/)
+    let word = context.matchBefore(/\w*/);
     if (word.from == word.to && !context.explicit) return null;
     return {
       from: word.from,
@@ -13,6 +14,6 @@ export function customCompletions (completions: CompletionsType[]) {
           type: item.type,
         })
       )) || [],
-    }
+    };
   }
 }
