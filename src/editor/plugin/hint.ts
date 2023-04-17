@@ -11,10 +11,10 @@ export const hintPlugin = (hintPaths: HintPathType[]) => {
 
     // 获取最后一个字符
     const latestChar = word.text[word.text.length - 1];
-
+    
     // 获取当前输入行所有文本
     const curLineText = context.state.doc.lineAt(context.pos).text;
-
+    
     let path: string = '';
 
     // 从当前字符往前遍历，直到遇到空格或前面没有字符了，把遍历的字符串存起来
@@ -29,7 +29,7 @@ export const hintPlugin = (hintPaths: HintPathType[]) => {
         break;
       }
     }
-
+    
     if (!path) return null;
 
     // 下面返回提示的数组一共有三种情况
@@ -37,7 +37,7 @@ export const hintPlugin = (hintPaths: HintPathType[]) => {
     // 第一种：得到的字符串中没有.，并且最后一个输入的字符不是点。
     //       直接把定义提示数组的所有根节点返回
 
-    // 第二种：字符串有.，并且最后一个输入的字符不是点。
+    // 第二种：字符串有.，并且最后一个输入的字符不是点。 user.name
     //       首先用.分割字符串得到字符串数组，把最后一个数组元素删除，然后遍历数组，根据路径获取当前对象的children，然后格式化返回。
     //       这里返回值里面的from字段有个坑，form其实就是你当前需要匹配字段的开始位置，假设你输入user.na,实际上这个form是n的位置，
     //       to是a的位置，所以我这里给form处理了一下
@@ -49,7 +49,7 @@ export const hintPlugin = (hintPaths: HintPathType[]) => {
       return {
         from: word.from,
         options: hintPaths?.map?.((item: any) => (
-          snippetCompletion(`${item.label}`, {
+          snippetCompletion(`${item.template || item.label}`, {
             label: `${item.label}`,
             detail: item.detail,
             type: item.type,
@@ -69,7 +69,7 @@ export const hintPlugin = (hintPaths: HintPathType[]) => {
         from: word.to - cur.length,
         to: word.to,
         options: temp?.map?.((item: any) => (
-          snippetCompletion(`${item.label}`, {
+          snippetCompletion(`${item.template || item.label}`, {
             label: `${item.label}`,
             detail: item.detail,
             type: item.type,
@@ -89,7 +89,7 @@ export const hintPlugin = (hintPaths: HintPathType[]) => {
         from: word.to - 1,
         to: word.to,
         options: temp?.map?.((item: any) => (
-          snippetCompletion(`.${item.label}`, {
+          snippetCompletion(`.${item.template || item.label}`, {
             label: `.${item.label}`,
             detail: item.detail,
             type: item.type,
