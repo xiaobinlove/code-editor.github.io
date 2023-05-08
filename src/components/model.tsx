@@ -36,7 +36,7 @@ const ModelField: FC<PropsType> = ({
     <Tree
       defaultExpandAll
       onSelect={(_, info: any) => {
-        const text = `[[${placeholderTypes.Field}.${info.node.parent.title}:${info.node.parent.code}.${info.node.title}:${info.node.code}]]`;
+        const text = `__${placeholderTypes.Field}.${info.node.parent.title}:${info.node.parent.code}.${info.node.title}:${info.node.code}__`;
         if (editorRef?.current?.insertText) {
           editorRef?.current?.insertText(text, false);
         }

@@ -31,7 +31,7 @@ export const keywordsPlugin = (
         return Decoration.mark({});
       }
 
-      let style: string;
+      let style: string = '';
 
       if (keywordsColor) {
         style = `color: ${keywordsColor};`;

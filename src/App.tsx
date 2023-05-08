@@ -78,7 +78,7 @@ function App() {
                 ref={editorRef}
                 height="calc(100vh - 48px)"
                 mode={mode}
-                defaultValue="// 输入user测试代码提示功能"
+                defaultValue=""
                 hintPaths={hintPaths}
                 onValueChange={onValueChange}
               />

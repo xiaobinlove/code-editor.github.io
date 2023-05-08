@@ -29,7 +29,7 @@ export const extensions = ({
   hintPaths?: HintPathType[];
 }): any[] => {
   return [
-    keywords.length ? keywordsPlugin(keywords, keywordsColor, keywordsClassName) : null,
+    keywords?.length ? keywordsPlugin(keywords, keywordsColor, keywordsClassName) : null,
     baseTheme,
     placeholdersPlugin(placeholderThemes, mode),
     EditorView.lineWrapping,
@@ -37,7 +37,7 @@ export const extensions = ({
       override: [
         customCompletions(completions),
         hintPaths?.length ? hintPlugin(hintPaths) : null,
-      ].filter(o => !!o)
+      ].filter(o => !!o) as any
     }),
     functionPlugin(functions),
   ].filter(o => !!o);

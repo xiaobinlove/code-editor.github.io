@@ -13,15 +13,16 @@ import { PlaceholderThemesType } from '../interface';
 export const placeholdersPlugin = (themes: PlaceholderThemesType, mode: string = 'name') => {
 
   class PlaceholderWidget extends WidgetType {
-    curFlag: string;
-    text: string;
-
+    curFlag: string | undefined;
+    text: string | undefined;
     constructor(text: string) {
       super();
       if (text) {
         const [curFlag, ...texts] = text.split('.');
         if (curFlag && texts.length) {
-          this.text = texts.map(t => t.split(':')[mode === 'code' ? 1 : 0]).join('.');
+          // this.text = texts.map(t => t.split(':')[mode === 'code' ? 1 : 0]).join('.');
+          this.text = texts.map(t => t.split(':')[mode === 'code' ? 1 : 0])[1];
+          
           this.curFlag = curFlag;
         }
       }
@@ -35,7 +36,7 @@ export const placeholdersPlugin = (themes: PlaceholderThemesType, mode: string =
       let elt = document.createElement('span');
       if (!this.text) return elt;
 
-      const { backgroudColor, borderColor, textColor } = themes[this.curFlag];
+      const { backgroudColor, borderColor, textColor } = themes[this.curFlag as string];
       elt.style.cssText = `
       border: 1px solid ${borderColor};
       border-radius: 4px;
@@ -55,8 +56,10 @@ export const placeholdersPlugin = (themes: PlaceholderThemesType, mode: string =
   }
 
   const placeholderMatcher = new MatchDecorator({
-    regexp: /\[\[(.+?)\]\]/g,
+    regexp: /__(.+?)__/g,
     decoration: (match) => {
+      console.log(match, 'match');
+      
       return Decoration.replace({
         widget: new PlaceholderWidget(match[1]),
       });

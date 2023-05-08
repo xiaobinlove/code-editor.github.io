@@ -10,7 +10,6 @@ import { githubLight } from '@uiw/codemirror-theme-github';
 import ReactCodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { snippet } from '@codemirror/autocomplete';
 import { Extension } from '@codemirror/state';
-
 import { extensions } from './extensions';
 import { CompletionsType, FunctionType, HintPathType, PlaceholderThemesType, ScriptEditorRef } from './interface';
 
@@ -88,7 +87,7 @@ const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
   }, []);
 
   const clearText = useCallback(() => {
-    const { view } = editorRef.current;
+    const { view } = editorRef.current as any;
     view.dispatch({
       changes: {
         from: 0,
@@ -103,7 +102,7 @@ const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
   }, []);
 
   const setText = useCallback((text: string) => {
-    const { view } = editorRef.current;
+    const { view } = editorRef.current as any;
     view.dispatch({
       changes: {
         from: 0,
@@ -146,17 +145,17 @@ const Editor: ForwardRefRenderFunction<ScriptEditorRef, PropsType> = ({
         }),
         ...(extensionsProps || [])
       ],
-    [
-      completions,
-      keywords,
-      placeholderThemes,
-      mode,
-      functions,
-      keywordsColor,
-      keywordsClassName,
-      hintPaths,
-      extensionsProps,
-    ]
+      [
+        completions,
+        keywords,
+        placeholderThemes,
+        mode,
+        functions,
+        keywordsColor,
+        keywordsClassName,
+        hintPaths,
+        extensionsProps,
+      ]
   );
 
   const onChangeHandle = useCallback(
