@@ -14,18 +14,19 @@ const Function: FC<PropsTypes> = ({ functions }) => {
           return (
             <div
               key={item.label}
-              onClick={ () => {
+              onClick={() => {
+                console.log(editorRef, 'editorRef')
                 if (editorRef?.current?.insertText) {
                   editorRef.current.insertText(`${item.template}`, true)
                 }
-              } }
+              }}
               className="px-[12px] py-[4px] hover:(bg-[rgba(0,0,0,0.04)]) cursor-pointer rounded-md"
             >
-               {item.label}
+              {item.label}
             </div>
           )
         })
-        }
+      }
     </div>
   )
 }

@@ -1,0 +1,59 @@
+.xdag-comp-SimpleTree__node {
+  margin-bottom: 4px;
+}
+
+.xdag-comp-SimpleTree__switcher {
+  width: 15px;
+  height: 15px;
+  margin-right: 2px;
+  overflow: hidden;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.xdag-comp-SimpleTree__title {
+  flex: 1;
+}
+
+.xdag-comp-SimpleTree__children {
+  display: none;
+  padding-top: 4px;
+  padding-left: 30px;
+}
+
+.xdag-comp-SimpleTree__leaf {
+  >.xdag-comp-SimpleTree__title-wrap {
+    >.xdag-comp-SimpleTree__switcher {
+      display: none;
+    }
+
+  }
+}
+
+
+
+.xdag-comp-SimpleTree__expanded {
+
+  >.xdag-comp-SimpleTree__title-wrap {
+    >.xdag-comp-SimpleTree__switcher {
+      >.anticon {
+        transform: rotate(90deg);
+      }
+    }
+
+  }
+
+  >.xdag-comp-SimpleTree__children {
+    display: block;
+  }
+}
+
+.xdag-comp-SimpleTree__title-wrap {
+  display: flex;
+}
+
+.xdag-comp-SimpleTree__disabled {
+  >.xdag-comp-SimpleTree__title-wrap {
+    opacity: 0.5;
+  }
+}
