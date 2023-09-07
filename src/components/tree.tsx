@@ -51,7 +51,7 @@ function Component<T extends DataNode = DataNode>({
     if (disabled || item.disabled) {
       return;
     }
-    onSelect?.(item.key, item, e)
+    onSelect?.(item.key as string, item, e)
   }
   const children = treeData.map((item) => {
     const hasChildren = item.children;
