@@ -21,13 +21,13 @@ const placeholderThemes = {
 const EditorView: FC = () => {
   const [value, setValue] = useState<string>('')
   const [mode, setMode] = useState('code')
-  const [localFunctions, setLocalFunctions] = useLocalStorageState<FunctionType[]>(
+  const [localFunctions = [], setLocalFunctions] = useLocalStorageState<FunctionType[]>(
     'functions',
     {
       defaultValue: functions,
     }
   );
-  const [keywordsConfig, setKeywordsConfig] = useLocalStorageState<KeywordsConfigType>(
+  const [keywordsConfig = [], setKeywordsConfig] = useLocalStorageState<KeywordsConfigType>(
     'keywords-config',
     {
       defaultValue: {

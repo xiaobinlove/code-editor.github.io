@@ -10,7 +10,7 @@ const Function: FC<PropsTypes> = ({ functions }) => {
   return (
     <div>
       {
-        functions.map(item => {
+        functions?.map(item => {
           return (
             <div
               key={item.label}
