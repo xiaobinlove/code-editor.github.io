@@ -27,7 +27,7 @@ const EditorView: FC = () => {
       defaultValue: functions,
     }
   );
-  const [keywordsConfig = [], setKeywordsConfig] = useLocalStorageState<KeywordsConfigType>(
+  const [keywordsConfig = { keywords: [], color: '' }, setKeywordsConfig] = useLocalStorageState<KeywordsConfigType>(
     'keywords-config',
     {
       defaultValue: {
